@@ -43,3 +43,9 @@ Validate a single Codex skill shape with the upstream validator when `PyYAML` is
 ```bash
 python3 /Users/nic/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/travel-writer
 ```
+
+## Installing Into Codex
+
+See [docs/installing-into-codex.md](docs/installing-into-codex.md) for install examples covering one skill, all skills, updates, verification, custom `CODEX_HOME`, and harness usage.
+
+中文安装说明见 [docs/installing-into-codex.zh.md](docs/installing-into-codex.zh.md)。

@@ -10,3 +10,7 @@ Current starter skills:
 - `markdown-formatter`: Markdown cleanup and structure
 - `summarizer`: faithful summaries of source material
 - `translator`: translation with tone and formatting preservation
+
+Install examples live in [../docs/installing-into-codex.md](../docs/installing-into-codex.md).
+
+中文安装说明见 [../docs/installing-into-codex.zh.md](../docs/installing-into-codex.zh.md)。
