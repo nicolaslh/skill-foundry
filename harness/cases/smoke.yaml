@@ -1,0 +1,44 @@
+cases:
+  - id: travel-article-beautifier-html
+    skill: travel-article-beautifier
+    input: "Beautify my rough notes from a two-day Hangzhou trip into a polished HTML travelogue with route timeline and practical tips."
+    expect:
+      - "Creates a clear article brief before drafting"
+      - "Separates narrative scenes from practical tips"
+      - "Flags unverified travel facts such as hours or prices"
+
+  - id: travel-writer-weekend-itinerary
+    skill: travel-writer
+    input: "Write a 3-day Kyoto itinerary for first-time visitors who like food, temples, and slow mornings."
+    expect:
+      - "Includes day-by-day structure"
+      - "Balances practical logistics with evocative travel writing"
+      - "Avoids unsupported claims about current opening hours"
+
+  - id: xiaohongshu-cafe-note
+    skill: xiaohongshu
+    input: "Turn these notes into a Xiaohongshu post: quiet cafe, good oat latte, great window seats, near a bookstore."
+    expect:
+      - "Includes title options, hook, body, and tags"
+      - "Uses platform-native but not exaggerated language"
+
+  - id: markdown-formatter-rough-notes
+    skill: markdown-formatter
+    input: "Format rough meeting notes into clear Markdown with headings, bullets, and action items."
+    expect:
+      - "Preserves all source meaning"
+      - "Uses clean Markdown hierarchy"
+
+  - id: summarizer-long-article
+    skill: summarizer
+    input: "Summarize a long article into an executive brief, key points, and open questions."
+    expect:
+      - "Separates facts from interpretation"
+      - "Keeps summary concise and faithful"
+
+  - id: translator-tone-preserving
+    skill: translator
+    input: "Translate an English product update into natural Chinese while preserving a calm professional tone."
+    expect:
+      - "Preserves formatting and intent"
+      - "Avoids over-literal phrasing"

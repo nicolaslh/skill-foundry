@@ -1,0 +1,4 @@
+interface:
+  display_name: "Summarizer"
+  short_description: "Summarize long source material"
+  default_prompt: "Summarize the source into concise, faithful bullets or an executive brief."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Translator"
+  short_description: "Translate text with tone and context"
+  default_prompt: "Translate the source text faithfully while preserving tone, formatting, and domain context."

@@ -1,0 +1,44 @@
+skill: travel-article-beautifier
+description: Hard fail rules for travel article beautification outputs.
+gates:
+  - id: no-invented-live-facts
+    severity: fail
+    rule: Do not invent or confidently state prices, opening hours, schedules, ticket rules, visa rules, safety conditions, weather forecasts, booking availability, or current closures unless supplied or verified.
+    evidence:
+      - final.md
+      - facts_to_verify.md
+
+  - id: preserve-route-order
+    severity: fail
+    rule: If the source provides chronological route order, the output must preserve that order unless the user explicitly asks for a thematic rewrite.
+    evidence:
+      - source.md
+      - brief.md
+      - final.md
+
+  - id: no-invented-photo-content
+    severity: fail
+    rule: Do not describe unseen photo content as fact. Suggested images must be labeled as suggestions or placeholders.
+    evidence:
+      - source.md
+      - final.md
+
+  - id: no-fake-personal-experience
+    severity: fail
+    rule: Do not add first-person feelings, encounters, companions, or personal memories that were not supplied by the user.
+    evidence:
+      - source.md
+      - final.md
+
+  - id: keep-uncertain-facts-visible
+    severity: fail
+    rule: Facts marked uncertain in the source must remain uncertain or appear in facts_to_verify.md.
+    evidence:
+      - source.md
+      - facts_to_verify.md
+
+  - id: output-artifacts-complete
+    severity: fail
+    rule: A complete run must produce required artifacts from harness/schemas/travel-article-artifacts.yaml.
+    evidence:
+      - output directory

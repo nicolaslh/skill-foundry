@@ -1,0 +1,4 @@
+interface:
+  display_name: "Travel Article Beautifier"
+  short_description: "Beautify travel notes into articles"
+  default_prompt: "Turn travel notes, photos, or source material into a polished, share-ready travel article."

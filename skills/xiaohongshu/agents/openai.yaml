@@ -1,0 +1,4 @@
+interface:
+  display_name: "Xiaohongshu"
+  short_description: "Create Xiaohongshu-style posts"
+  default_prompt: "Turn raw material into a Xiaohongshu post with hook, body, title options, and tags."

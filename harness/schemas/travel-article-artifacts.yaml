@@ -1,0 +1,59 @@
+skill: travel-article-beautifier
+description: Required artifact set for a complete travel article beautification run.
+artifacts:
+  - id: source
+    filename: source.md
+    required: true
+    purpose: Raw user-provided travel notes, draft, captions, or source material.
+
+  - id: brief
+    filename: brief.md
+    required: true
+    purpose: Normalized article brief with audience, route, facts, tone, and output requirements.
+    required_sections:
+      - Article Promise
+      - Audience
+      - Route
+      - Strongest Scenes
+      - Practical Facts
+      - Tone
+      - Output
+
+  - id: style-decision
+    filename: style_decision.md
+    required: true
+    purpose: Style router decision and selected prompt template.
+    required_sections:
+      - Primary Style
+      - Secondary Influence
+      - Why
+      - Template Path
+
+  - id: draft
+    filename: draft.md
+    required: true
+    purpose: First full article draft before final review.
+
+  - id: review
+    filename: review.md
+    required: true
+    purpose: Review notes using rubric and quality gates.
+    required_sections:
+      - Rubric Notes
+      - Quality Gate Results
+      - Required Revisions
+
+  - id: final
+    filename: final.md
+    required: true
+    purpose: Final publishable article.
+
+  - id: facts-to-verify
+    filename: facts_to_verify.md
+    required: true
+    purpose: Current, uncertain, missing, or source-ambiguous facts that need verification.
+
+  - id: social-derivatives
+    filename: social_derivatives.md
+    required: false
+    purpose: Optional titles, excerpts, captions, tags, or platform-specific copy.

@@ -1,0 +1,61 @@
+skill: travel-article-beautifier
+description: Evaluation rubric for travel article beautification outputs.
+criteria:
+  - id: style-routing
+    weight: 15
+    description: Selects the appropriate style prompt template based on source signals.
+    pass:
+      - Primary style matches dominant user intent.
+      - Rationale cites source signals, not generic preference.
+      - Secondary influence is used only when helpful.
+    fail:
+      - Chooses a style because it sounds attractive but source signals do not match.
+      - Combines multiple styles without reason.
+
+  - id: factual-integrity
+    weight: 25
+    description: Preserves supplied travel facts and avoids invented live claims.
+    pass:
+      - Preserves route order, place names, dates, and user-provided constraints.
+      - Flags prices, hours, schedules, rules, safety claims, and booking advice when unverified.
+      - Does not invent personal experience, photos, or recommendations.
+    fail:
+      - Adds unsupported places, emotions, prices, schedules, or claims.
+      - Turns uncertain notes into confident facts.
+
+  - id: narrative-quality
+    weight: 20
+    description: Produces a polished travel article with readable arc and concrete detail.
+    pass:
+      - Opening has a clear hook or scene.
+      - Sections have meaningful progression.
+      - Sensory details are specific and grounded in source material.
+    fail:
+      - Output is a generic destination description.
+      - Prose is decorative but disconnected from source notes.
+
+  - id: utility-and-structure
+    weight: 20
+    description: Makes the article useful and scannable for the target reader.
+    pass:
+      - Separates narrative, practical notes, captions, and verification items.
+      - Uses headings and lists appropriate to the selected style.
+      - Includes route, tips, or checklist when the source requires planning value.
+    fail:
+      - Practical facts interrupt the narrative or disappear entirely.
+      - Output ignores requested format.
+
+  - id: publication-readiness
+    weight: 20
+    description: Final artifact is ready to publish or easy to convert.
+    pass:
+      - Includes title options when useful.
+      - Keeps Markdown or HTML clean and portable.
+      - Ends with assumptions and facts-to-verify when needed.
+    fail:
+      - Requires hidden context to understand.
+      - Leaves placeholders unexplained.
+scoring:
+  pass_threshold: 80
+  review_threshold: 65
+  fail_below: 65

@@ -1,0 +1,45 @@
+cases:
+  - id: field-journal-style
+    skill: travel-article-beautifier
+    template: field-journal
+    input: "Turn a misty mountain village weekend diary into a reflective HTML travel article."
+    expect:
+      - "Uses the field-journal prompt template"
+      - "Expands sensory details without inventing places"
+      - "Keeps facts-to-verify visible"
+
+  - id: city-magazine-style
+    skill: travel-article-beautifier
+    template: city-magazine
+    input: "Beautify notes from a Shanghai neighborhood walk into a stylish city-magazine article."
+    expect:
+      - "Uses the city-magazine prompt template"
+      - "Creates editorial sections with captions"
+      - "Keeps recommendations tied to supplied notes"
+
+  - id: route-map-style
+    skill: travel-article-beautifier
+    template: route-map
+    input: "Create a route-based travelogue for a three-city train trip."
+    expect:
+      - "Uses the route-map prompt template"
+      - "Preserves chronological route order"
+      - "Includes timing and verification notes"
+
+  - id: minimal-gallery-style
+    skill: travel-article-beautifier
+    template: minimal-gallery
+    input: "Make a photo-led island travel article from image captions and short notes."
+    expect:
+      - "Uses the minimal-gallery prompt template"
+      - "Prioritizes image captions and visual rhythm"
+      - "Does not invent unseen photo content"
+
+  - id: practical-guide-style
+    skill: travel-article-beautifier
+    template: practical-guide
+    input: "Turn a family trip plan into a practical guide with route, food, and avoid sections."
+    expect:
+      - "Uses the practical-guide prompt template"
+      - "Keeps planning information scannable"
+      - "Flags unverified prices, hours, and rules"

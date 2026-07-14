@@ -1,0 +1,4 @@
+interface:
+  display_name: "Markdown Formatter"
+  short_description: "Clean and structure Markdown"
+  default_prompt: "Format rough content into clean Markdown while preserving meaning."

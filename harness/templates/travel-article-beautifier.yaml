@@ -1,0 +1,191 @@
+skill: travel-article-beautifier
+description: Registry for AI-readable travel article beautification prompt templates.
+templates:
+  - id: field-journal
+    type: prompt
+    path: skills/travel-article-beautifier/references/style-templates/field-journal.md
+    required_references:
+      - skills/travel-article-beautifier/references/style-router.md
+      - skills/travel-article-beautifier/references/review-checklist.md
+    recognition_keywords:
+      - 日记
+      - 手账
+      - 慢旅行
+      - 山村
+      - 海边
+      - 古镇
+      - 雨天
+      - 清晨
+      - 黄昏
+      - 氛围感
+    avoid_when:
+      - user mainly needs route optimization
+      - user wants dense planning checklists
+      - source is primarily urban recommendations
+    output_sections:
+      - title options
+      - article promise
+      - opening scene
+      - polished article
+      - field notes
+      - facts to verify
+    best_for:
+      - reflective travel essays
+      - slow travel diaries
+      - nature, villages, islands, and seasonal trips
+    checks:
+      - recognizes reflective, seasonal, and nature-adjacent travel material
+      - instructs the AI to use field notes and facts-to-verify
+      - warns against inventing personal experience or live facts
+
+  - id: city-magazine
+    type: prompt
+    path: skills/travel-article-beautifier/references/style-templates/city-magazine.md
+    required_references:
+      - skills/travel-article-beautifier/references/style-router.md
+      - skills/travel-article-beautifier/references/review-checklist.md
+    recognition_keywords:
+      - city walk
+      - 城市漫步
+      - 咖啡馆
+      - 书店
+      - 街区
+      - 杂志感
+      - 高级
+      - 克制
+      - 小众
+      - 生活方式
+    avoid_when:
+      - route chronology is the main value
+      - source is mainly personal reflection
+      - user wants a planning-first guide
+    output_sections:
+      - title options
+      - editorial angle
+      - magazine outline
+      - polished article
+      - captions
+      - recommendation caveats
+    best_for:
+      - city guides
+      - stylish weekend trips
+      - neighborhood walks
+      - editorial travel recommendations
+    checks:
+      - recognizes city, neighborhood, cafe, and lifestyle guide signals
+      - instructs the AI to create editorial angles and captions
+      - prevents fake recommendations
+
+  - id: route-map
+    type: prompt
+    path: skills/travel-article-beautifier/references/style-templates/route-map.md
+    required_references:
+      - skills/travel-article-beautifier/references/style-router.md
+      - skills/travel-article-beautifier/references/review-checklist.md
+    recognition_keywords:
+      - day 1
+      - day 2
+      - 自驾
+      - 火车
+      - 高铁
+      - 多城市
+      - 路线
+      - 行程
+      - 中转
+      - 时间线
+    avoid_when:
+      - source is one-place mood writing
+      - photos are the primary content
+      - user does not care about order or logistics
+    output_sections:
+      - route title options
+      - route overview
+      - day or leg timeline
+      - polished travelogue
+      - practical notes
+      - verification list
+    best_for:
+      - road trips
+      - train routes
+      - multi-city itineraries
+      - day-by-day travelogues
+    checks:
+      - recognizes chronology, transport, and multi-stop source material
+      - instructs the AI to preserve route order
+      - warns against inventing schedules, fares, distances, or rules
+
+  - id: minimal-gallery
+    type: prompt
+    path: skills/travel-article-beautifier/references/style-templates/minimal-gallery.md
+    required_references:
+      - skills/travel-article-beautifier/references/style-router.md
+      - skills/travel-article-beautifier/references/review-checklist.md
+    recognition_keywords:
+      - 照片
+      - 图 1
+      - 图1
+      - caption
+      - 画廊
+      - visual diary
+      - 极简
+      - 影像
+      - 民宿
+      - 风景
+    avoid_when:
+      - user needs dense practical planning
+      - source has no visual material or image descriptions
+      - article must be longform narrative
+    output_sections:
+      - minimal title options
+      - visual sequence
+      - caption set
+      - short article prose
+      - suggested image placeholders
+      - missing image notes
+    best_for:
+      - photo-led travel essays
+      - visual diaries
+      - hotel, island, museum, and landscape pieces
+    checks:
+      - recognizes photo-led and caption-heavy material
+      - instructs the AI to keep prose restrained
+      - prevents inventing unseen photo content
+
+  - id: practical-guide
+    type: prompt
+    path: skills/travel-article-beautifier/references/style-templates/practical-guide.md
+    required_references:
+      - skills/travel-article-beautifier/references/style-router.md
+      - skills/travel-article-beautifier/references/review-checklist.md
+    recognition_keywords:
+      - 攻略
+      - 避坑
+      - 亲子
+      - 预算
+      - 交通
+      - 住宿
+      - 餐厅
+      - 清单
+      - 路线安排
+      - 实用
+    avoid_when:
+      - user wants purely literary prose
+      - source is mostly photo captions
+      - exact logistics are unavailable and user does not want caveats
+    output_sections:
+      - guide title options
+      - reader fit
+      - route summary
+      - practical sections
+      - mistakes to avoid
+      - final checklist
+      - facts to verify
+    best_for:
+      - itinerary guides
+      - planning posts
+      - family trips
+      - food and stay recommendations
+    checks:
+      - recognizes guide, itinerary, checklist, and planning signals
+      - instructs the AI to structure practical sections
+      - warns against inventing live travel facts

@@ -1,0 +1,29 @@
+name: travel-article-beautifier
+description: End-to-end workflow for turning travel source material into a polished article using harness-managed style prompt templates.
+skill: travel-article-beautifier
+steps:
+  - id: source-intake
+    reference: skills/travel-article-beautifier/references/source-intake.md
+    schema: harness/schemas/travel-article-artifacts.yaml
+    output: article brief with route, audience, source facts, tone, and verification needs
+
+  - id: style-router
+    reference: skills/travel-article-beautifier/references/style-router.md
+    output: primary style, optional secondary influence, and style rationale
+
+  - id: style-template
+    registry: harness/templates/travel-article-beautifier.yaml
+    output: selected prompt template instructions loaded into context
+
+  - id: draft
+    reference: skills/travel-article-beautifier/references/article-types.md
+    output: polished travel article in requested format
+
+  - id: review
+    reference: skills/travel-article-beautifier/references/review-checklist.md
+    rubric: harness/rubrics/travel-article-beautifier.yaml
+    quality_gates: harness/quality-gates/travel-article-beautifier.yaml
+    output: revision notes and corrected final article
+
+  - id: delivery
+    output: final article, assumptions, facts-to-verify, and optional social derivative

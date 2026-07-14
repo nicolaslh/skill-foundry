@@ -1,0 +1,4 @@
+interface:
+  display_name: "Travel Writer"
+  short_description: "Draft travel narratives and itineraries"
+  default_prompt: "Write a polished travel piece from notes, constraints, and audience context."

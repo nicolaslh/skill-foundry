@@ -1,0 +1,27 @@
+cases:
+  - id: router-not-field-journal-when-guide-needed
+    skill: travel-article-beautifier
+    template: practical-guide
+    input: "我有一段很有氛围感的亲子海边旅行日记，但主要想整理成避坑攻略：住宿怎么选、几点出门、哪些项目不适合 5 岁小孩。"
+    expect:
+      - "Selects practical-guide despite words like 氛围感 and 日记"
+      - "Explains that planning intent dominates reflective tone"
+      - "Flags live facts such as hours, prices, and availability"
+
+  - id: router-not-city-magazine-when-route-matters
+    skill: travel-article-beautifier
+    template: route-map
+    input: "请写得有杂志感，但这是一条四天自驾路线：成都-康定-新都桥-塔公-成都，顺序不能乱。"
+    expect:
+      - "Selects route-map as primary style"
+      - "May use city-magazine only as secondary influence if helpful"
+      - "Preserves route order"
+
+  - id: router-not-minimal-gallery-without-images
+    skill: travel-article-beautifier
+    template: field-journal
+    input: "想要极简、像画廊一样克制，但我没有照片，只有一段在雨天古镇独自散步的日记。"
+    expect:
+      - "Does not select minimal-gallery as primary style because no images or captions are supplied"
+      - "Selects field-journal based on diary, rain, old town, and solitude"
+      - "Can mention suggested image placeholders only as optional"

@@ -1,0 +1,18 @@
+name: content-pipeline
+description: Draft, polish, format, and optionally translate a piece of content.
+steps:
+  - id: source-summary
+    skill: summarizer
+    purpose: Extract the key facts, audience, and constraints from source material.
+  - id: channel-draft
+    skill: xiaohongshu
+    purpose: Create a platform-native draft when the target channel is Xiaohongshu.
+  - id: longform-draft
+    skill: travel-writer
+    purpose: Create narrative travel copy when the target format is longform travel writing.
+  - id: format
+    skill: markdown-formatter
+    purpose: Normalize headings, bullets, links, and final Markdown shape.
+  - id: translate
+    skill: translator
+    purpose: Translate only when the requested output language differs from the source.
