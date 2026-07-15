@@ -24,6 +24,58 @@ cp -R skills/travel-article-beautifier "${CODEX_HOME:-$HOME/.codex}/skills/trave
 
 安装后，通常下一轮 Codex 对话就可以使用这个 skill。
 
+## 使用本仓库安装脚本
+
+如果希望安装过程更稳定、可重复，可以使用本仓库提供的安装脚本：
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier
+```
+
+安装全部 skills：
+
+```bash
+python3 utils/install_skill.py --all
+```
+
+安装到自定义目录：
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --dest /path/to/codex-home/skills
+```
+
+替换已有安装前先备份：
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --backup-existing
+```
+
+直接覆盖已有安装：
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --overwrite
+```
+
+## 开发期软链接安装
+
+如果你正在频繁修改 skill，可以使用软链接安装：
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --method symlink --backup-existing
+```
+
+这样 Codex skills 目录会指向当前仓库里的 skill。你在仓库中修改文件后，安装目录会同步看到变化。如果某个 Codex 环境不跟随软链接，则改用 copy 方式。
+
+## 使用 rsync 同步安装
+
+如果希望重复同步，并删除目标目录中已经被源目录删除的旧文件，可以使用 `rsync`：
+
+```bash
+dest="${CODEX_HOME:-$HOME/.codex}/skills/travel-article-beautifier"
+mkdir -p "$(dirname "$dest")"
+rsync -a --delete skills/travel-article-beautifier/ "$dest/"
+```
+
 ## 安装全部 Skills
 
 把本仓库 `skills/` 下所有 skill 都安装到 Codex：
@@ -106,3 +158,14 @@ cp -R skills/travel-article-beautifier "$CODEX_HOME/skills/travel-article-beauti
 - `harness/` 是仓库级开发和评测工具，不会被 Codex 自动发现。
 - 如果要跑评测用例，请继续在本仓库中使用 `harness/run_case.py`。
 - 覆盖已安装 skill 前，建议先备份旧目录。
+
+## 未来从 GitHub 安装
+
+如果之后把本仓库推到 GitHub，也可以使用 Codex skill installer 直接从 GitHub URL 安装：
+
+```bash
+python3 /Users/nic/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --url https://github.com/<owner>/<repo>/tree/main/skills/travel-article-beautifier
+```
+
+这种方式适合跨设备或团队共享 skill。

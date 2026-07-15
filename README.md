@@ -30,6 +30,12 @@ python3 utils/check_skills.py
 python3 utils/check_harness.py
 ```
 
+Install a local skill into Codex:
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier
+```
+
 Build a harness task package:
 
 ```bash

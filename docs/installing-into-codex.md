@@ -24,6 +24,58 @@ cp -R skills/travel-article-beautifier "${CODEX_HOME:-$HOME/.codex}/skills/trave
 
 The skill should be available to Codex on the next turn.
 
+## Install With The Local Helper
+
+Use the repository helper when you want repeatable installs:
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier
+```
+
+Install all skills:
+
+```bash
+python3 utils/install_skill.py --all
+```
+
+Install to a custom destination:
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --dest /path/to/codex-home/skills
+```
+
+Back up an existing install before replacing it:
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --backup-existing
+```
+
+Overwrite an existing install:
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --overwrite
+```
+
+## Development Install With A Symlink
+
+For active development, install a symlink so Codex reads the skill directly from this repository:
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --method symlink --backup-existing
+```
+
+This is convenient while editing, because changes in the repository are reflected in the installed skill path. If a Codex environment does not follow symlinks, use copy mode instead.
+
+## Sync Install With rsync
+
+Use `rsync` when you want repeatable updates with deletion of removed files:
+
+```bash
+dest="${CODEX_HOME:-$HOME/.codex}/skills/travel-article-beautifier"
+mkdir -p "$(dirname "$dest")"
+rsync -a --delete skills/travel-article-beautifier/ "$dest/"
+```
+
 ## Install All Skills
 
 Install every skill in this repository:
@@ -106,3 +158,14 @@ cp -R skills/travel-article-beautifier "$CODEX_HOME/skills/travel-article-beauti
 - Repository-level harness files are for development and evaluation.
 - If a skill relies on harness-managed examples, keep this repository available and use `harness/run_case.py`.
 - Avoid copying a skill over an existing destination without backing it up.
+
+## Future GitHub Install
+
+After this repository is pushed to GitHub, a Codex skill installer can install a skill directly from a repo URL:
+
+```bash
+python3 /Users/nic/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --url https://github.com/<owner>/<repo>/tree/main/skills/travel-article-beautifier
+```
+
+Use this for sharing skills across machines or teammates.
