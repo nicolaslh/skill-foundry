@@ -22,6 +22,7 @@ TEMPLATES_DIR = ROOT / "harness" / "templates"
 RUBRICS_DIR = ROOT / "harness" / "rubrics"
 GATES_DIR = ROOT / "harness" / "quality-gates"
 SCHEMAS_DIR = ROOT / "harness" / "schemas"
+DEFAULT_SCHEMA = SCHEMAS_DIR / "travel-article-artifacts.yaml"
 
 
 def unquote(value: str) -> str:
@@ -82,6 +83,15 @@ def find_template_path(skill: str, template: str | None) -> Path | None:
     raise SystemExit(f"Template {template!r} not found in {registry.relative_to(ROOT)}")
 
 
+def find_schema_path(skill: str) -> Path | None:
+    skill_schema = SCHEMAS_DIR / f"{skill}-artifacts.yaml"
+    if skill_schema.exists():
+        return skill_schema
+    if DEFAULT_SCHEMA.exists():
+        return DEFAULT_SCHEMA
+    return None
+
+
 def copy_if_exists(path: Path, dest: Path, target_name: str | None = None) -> str | None:
     if not path.exists():
         return None
@@ -92,6 +102,9 @@ def copy_if_exists(path: Path, dest: Path, target_name: str | None = None) -> st
 
 def write_task_readme(output: Path, manifest: dict[str, object]) -> None:
     expected = "\n".join(f"- {item}" for item in manifest.get("expect", []))
+    schema_file = manifest.get("schema_file") or "none"
+    rubric_file = manifest.get("rubric_file") or "none"
+    quality_gates_file = manifest.get("quality_gates_file") or "none"
     readme = f"""# Harness Task Package: {manifest["case_id"]}
 
 ## Source
@@ -99,6 +112,9 @@ def write_task_readme(output: Path, manifest: dict[str, object]) -> None:
 - Case file: `{manifest["case_file"]}`
 - Skill: `{manifest["skill"]}`
 - Template: `{manifest.get("template") or "none"}`
+- Artifact schema: `{schema_file}`
+- Rubric: `{rubric_file}`
+- Quality gates: `{quality_gates_file}`
 
 ## User Input
 
@@ -113,14 +129,17 @@ def write_task_readme(output: Path, manifest: dict[str, object]) -> None:
 1. Read `input.md`.
 2. Read `manifest.json`.
 3. Load the style prompt template when `template_file` is present.
-4. Produce artifacts according to `travel-article-artifacts.yaml`.
-5. Review with `travel-article-beautifier.yaml` rubric and quality gates.
+4. Produce artifacts according to the copied artifact schema when `schema_file` is present.
+5. Review with the copied rubric and quality gates when present.
 """
     (output / "README.md").write_text(readme, encoding="utf-8")
 
 
 def write_codex_task(output: Path, manifest: dict[str, object]) -> None:
     template_file = manifest.get("template_file") or "none"
+    schema_file = manifest.get("schema_file") or "none"
+    rubric_file = manifest.get("rubric_file") or "none"
+    quality_gates_file = manifest.get("quality_gates_file") or "none"
     task = f"""# Codex Harness Task
 
 You are running a local harness case for `{manifest["skill"]}`.
@@ -130,6 +149,9 @@ You are running a local harness case for `{manifest["skill"]}`.
 - Case id: `{manifest["case_id"]}`
 - Template: `{manifest.get("template") or "none"}`
 - Template file: `{template_file}`
+- Artifact schema: `{schema_file}`
+- Rubric: `{rubric_file}`
+- Quality gates: `{quality_gates_file}`
 
 ## Instructions
 
@@ -137,9 +159,9 @@ You are running a local harness case for `{manifest["skill"]}`.
 2. Read `expected.md`.
 3. Read `manifest.json`.
 4. If a template file is present, follow that prompt template.
-5. Produce all required artifacts from `travel-article-artifacts.yaml`.
-6. Review the output with `rubric.{manifest["skill"]}.yaml`.
-7. Apply `quality-gates.{manifest["skill"]}.yaml`; fix any fail-severity issue before final delivery.
+5. If an artifact schema is present, produce all required artifacts from that schema.
+6. If a rubric is present, review the output with that rubric.
+7. If quality gates are present, apply them; fix any fail-severity issue before final delivery.
 8. Write final artifacts into an `output/` directory beside this task file.
 
 ## Required Final Response
@@ -147,9 +169,9 @@ You are running a local harness case for `{manifest["skill"]}`.
 After completing the case, report:
 
 - Output directory path
-- Selected style and rationale
+- Selected diagram/style and rationale
 - Quality gate pass/fail summary
-- Any facts that still need verification
+- Any assumptions or facts that still need verification
 """
     (output / "codex_task.md").write_text(task, encoding="utf-8")
 
@@ -172,6 +194,7 @@ def main() -> int:
     template = case.get("template")
     template_name = str(template) if template else None
     template_path = find_template_path(skill, template_name)
+    schema_path = find_schema_path(skill)
 
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
     output = Path(args.out).expanduser() / f"{timestamp}-{args.case}"
@@ -196,7 +219,7 @@ def main() -> int:
             output,
             f"quality-gates.{skill}.yaml",
         ),
-        "schema_file": copy_if_exists(SCHEMAS_DIR / "travel-article-artifacts.yaml", output),
+        "schema_file": copy_if_exists(schema_path, output) if schema_path else None,
     }
 
     manifest: dict[str, object] = {
@@ -206,6 +229,7 @@ def main() -> int:
         "input": case.get("input") or "",
         "expect": case.get("expect", []),
         "case_file": str(case_file.relative_to(ROOT)),
+        "schema_source": str(schema_path.relative_to(ROOT)) if schema_path else None,
         **copied,
     }
 

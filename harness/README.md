@@ -14,6 +14,7 @@ Start with smoke tests, then add realistic examples whenever a skill fails or ge
 ## Rubrics And Examples
 
 - Put scoring rubrics in `harness/rubrics/`.
+- Put skill-specific artifact schemas in `harness/schemas/<skill>-artifacts.yaml`.
 - Put realistic input/expected pairs in `harness/examples/<skill>/<case>/`.
 - Use examples to catch regressions after changing a prompt template, router, or workflow.
 

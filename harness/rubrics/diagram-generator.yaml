@@ -1,0 +1,61 @@
+skill: diagram-generator
+description: Evaluation rubric for HTML-first diagram generation outputs.
+criteria:
+  - id: source-faithfulness
+    weight: 25
+    description: Preserves the user's supplied process, architecture, or code relationships without inventing unsupported structure.
+    pass:
+      - Nodes and edges map back to supplied descriptions, code, config, or inspected files.
+      - Inferred relationships are visually marked or listed as assumptions.
+      - Code-derived diagrams use actual identifiers where helpful.
+    fail:
+      - Adds services, databases, protocols, or runtime behavior not present in the source.
+      - Presents uncertain relationships as confirmed facts.
+
+  - id: diagram-choice
+    weight: 20
+    description: Selects diagram type and level of abstraction that fit the user request.
+    pass:
+      - Uses flowchart, architecture, sequence, dependency, data-flow, or state views appropriately.
+      - Splits complex systems into multiple focused views instead of one overloaded diagram.
+      - Explains the selected view briefly when useful.
+    fail:
+      - Uses one generic graph for all requests.
+      - Mixes incompatible abstraction levels in a confusing way.
+
+  - id: html-quality
+    weight: 25
+    description: Produces portable, readable, self-contained HTML as the default output.
+    pass:
+      - Includes complete HTML with inline CSS and no unapproved external dependencies.
+      - Uses clear visual grouping, legends, readable labels, and responsive layout.
+      - Uses accessible labels and does not rely only on color.
+    fail:
+      - Outputs an incomplete snippet when a full artifact is expected.
+      - Requires CDN scripts, web fonts, or hidden assets without user approval.
+
+  - id: visual-clarity
+    weight: 20
+    description: Makes relationships easy to understand at a glance.
+    pass:
+      - Uses consistent shapes, arrows, labels, boundaries, and line styles.
+      - Highlights critical paths, async flows, decisions, data stores, and external systems distinctly.
+      - Keeps node count manageable or decomposes the view.
+    fail:
+      - Produces crowded, unlabeled, or visually ambiguous diagrams.
+      - Makes arrows or grouping inconsistent.
+
+  - id: delivery-usefulness
+    weight: 10
+    description: Delivers the diagram in a way that is easy to inspect and revise.
+    pass:
+      - Leads with the artifact or file path.
+      - Lists material assumptions and one useful next refinement.
+      - Keeps explanatory prose concise.
+    fail:
+      - Buries the artifact under long explanation.
+      - Leaves no indication of assumptions, uncertainty, or next steps.
+scoring:
+  pass_threshold: 80
+  review_threshold: 65
+  fail_below: 65

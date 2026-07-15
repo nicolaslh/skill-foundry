@@ -1,0 +1,43 @@
+skill: diagram-generator
+description: Required artifact set for a complete diagram generation harness run.
+artifacts:
+  - id: source
+    filename: source.md
+    required: true
+    purpose: Raw user-provided description, code sketch, repository notes, or files inspected for the diagram.
+
+  - id: diagram-brief
+    filename: diagram_brief.md
+    required: true
+    purpose: Normalized diagram brief with audience, source evidence, selected view type, entities, relationships, and output requirements.
+    required_sections:
+      - Diagram Goal
+      - Source Evidence
+      - Selected Views
+      - Entities
+      - Relationships
+      - Output Requirements
+
+  - id: diagram
+    filename: diagram.html
+    required: true
+    purpose: Final self-contained HTML diagram artifact.
+
+  - id: assumptions
+    filename: assumptions.md
+    required: true
+    purpose: Inferred, uncertain, abstracted, or missing facts that affect the diagram.
+
+  - id: review
+    filename: review.md
+    required: true
+    purpose: Review notes using the diagram-generator rubric and quality gates.
+    required_sections:
+      - Rubric Notes
+      - Quality Gate Results
+      - Required Revisions
+
+  - id: alternatives
+    filename: alternatives.md
+    required: false
+    purpose: Optional Mermaid, PlantUML, Graphviz, SVG, or simplified text alternative when useful or requested.

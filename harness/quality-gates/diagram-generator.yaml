@@ -1,0 +1,39 @@
+skill: diagram-generator
+description: Hard fail rules for HTML-first diagram generation outputs.
+gates:
+  - id: html-is-self-contained
+    severity: fail
+    rule: Default HTML diagram output must be a complete, self-contained HTML document with inline CSS and no unapproved external scripts, stylesheets, fonts, or assets.
+    evidence:
+      - diagram.html
+      - final response
+
+  - id: no-unsupported-architecture
+    severity: fail
+    rule: Do not invent services, stores, queues, protocols, deployment boundaries, or runtime behavior when generating from supplied descriptions or code. Mark uncertain relationships as assumptions.
+    evidence:
+      - source.md
+      - diagram_brief.md
+      - assumptions.md
+      - diagram.html
+
+  - id: code-diagrams-use-code-evidence
+    severity: fail
+    rule: Code-derived diagrams must be grounded in inspected files, pasted code, imports, routes, schemas, config, or call sites rather than generic architecture guesses.
+    evidence:
+      - source.md
+      - diagram_brief.md
+      - diagram.html
+
+  - id: readable-at-common-width
+    severity: fail
+    rule: The diagram must remain readable at common laptop browser widths; split overloaded diagrams into multiple views instead of shrinking text below readable size.
+    evidence:
+      - diagram.html
+      - review.md
+
+  - id: output-artifacts-complete
+    severity: fail
+    rule: A complete harness run must produce required artifacts from harness/schemas/diagram-generator-artifacts.yaml.
+    evidence:
+      - output directory

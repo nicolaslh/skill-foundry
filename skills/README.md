@@ -6,6 +6,7 @@ Current starter skills:
 
 - `travel-writer`: travel narrative and itinerary writing
 - `travel-article-beautifier`: polished travelogue article and visual layout creation
+- `diagram-generator`: HTML-first flowchart, architecture, dependency, and sequence diagram generation
 - `xiaohongshu`: Xiaohongshu-style post drafting
 - `markdown-formatter`: Markdown cleanup and structure
 - `summarizer`: faithful summaries of source material
