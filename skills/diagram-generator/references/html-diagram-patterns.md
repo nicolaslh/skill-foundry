@@ -58,6 +58,7 @@ Keep labels short. Put details in side notes rather than stuffing nodes.
 - Show direction of data or control flow with arrows.
 - Avoid more than three visual hierarchy levels in one diagram.
 - If deployment and logical architecture differ, produce two sections instead of merging them.
+- For production architecture blueprint visuals with dark grid, region IDs, node IDs, role colors, and sync/async edge legend, use `production-architecture-blueprint.md`.
 
 ### Sequence
 
@@ -87,6 +88,21 @@ Use a calm default palette:
 - Border: `#cbd5e1`
 
 Use system fonts. Do not use web fonts unless requested.
+
+For production architecture blueprints, a dark operational palette is acceptable:
+
+- Background: `#061521`
+- Grid: `rgba(125, 211, 252, 0.06)`
+- Text: `#c8d3e0`
+- Muted text: `#91a3b8`
+- Edge/client: `#22d3ee`
+- API/gateway: `#60a5fa`
+- Business service: `#34d399`
+- Queue/middleware: `#fb923c`
+- Infra/platform: `#fbbf24`
+- Security/auth: `#fb7185`
+- Data/persistence: `#a78bfa`
+- External: `#94a3b8`
 
 ## Accessibility And Editing
 

@@ -27,6 +27,7 @@ Turn vague system descriptions or source code into diagrams that are easy to ins
 3. Choose the diagram type:
    - Flowchart for ordered decisions, business processes, pipelines, and user journeys.
    - Architecture diagram for systems, services, deployment boundaries, queues, stores, APIs, and external actors.
+   - Production architecture blueprint for polished cloud/platform diagrams with regions, numbered nodes, role colors, legends, and sync/async edges. Use `references/production-architecture-blueprint.md`.
    - Component/dependency graph for modules, packages, classes, functions, imports, ownership, or build dependencies.
    - Sequence diagram for request/response behavior, async events, handoffs, and cross-service interactions.
    - Data-flow diagram for ingestion, transformation, storage, lineage, and privacy boundaries.
@@ -49,6 +50,8 @@ Turn vague system descriptions or source code into diagrams that are easy to ins
 ## HTML Requirements
 
 Read `references/html-diagram-patterns.md` before generating non-trivial HTML diagrams, multi-section diagrams, or repository/code-derived diagrams.
+
+Read `references/production-architecture-blueprint.md` when the user asks for a diagram like a production platform architecture map, cloud architecture blueprint, AI service platform, SaaS architecture, or the reference image with R/N labels and role-colored nodes.
 
 For all HTML output:
 

@@ -1,0 +1,38 @@
+skill: diagram-generator
+description: Registry for diagram generator templates and style references.
+templates:
+  - id: production-architecture-blueprint
+    type: reference
+    path: skills/diagram-generator/references/production-architecture-blueprint.md
+    best_for:
+      - production cloud architecture diagrams
+      - SaaS platform diagrams
+      - AI service platform diagrams
+      - Kubernetes, data plane, and third-party integration maps
+    recognition_keywords:
+      - 生产架构
+      - 系统架构图
+      - 平台架构
+      - 云架构
+      - EKS
+      - Kubernetes
+      - 微服务
+      - AI 客服
+      - SaaS
+      - 类似这张图
+    required_references:
+      - skills/diagram-generator/references/html-diagram-patterns.md
+      - skills/diagram-generator/references/production-architecture-blueprint.md
+    output_sections:
+      - title and metadata
+      - region boxes
+      - numbered nodes
+      - sync and async edges
+      - role legend
+      - assumptions
+    checks:
+      - uses R/N IDs for regions and nodes
+      - distinguishes sync and async edges
+      - includes role color legend
+      - keeps external providers outside internal regions
+      - lists inferred relationships as assumptions

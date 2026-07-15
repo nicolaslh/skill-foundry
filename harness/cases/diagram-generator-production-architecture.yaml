@@ -1,0 +1,11 @@
+cases:
+  - id: diagram-production-architecture-blueprint
+    skill: diagram-generator
+    template: production-architecture-blueprint
+    input: "Generate a production architecture diagram for an AI customer support platform with React portal, Cloudflare, Kong gateway, FastAPI tenant API, auth service, session orchestrator, PostgreSQL, Redis, Kafka, Qdrant, OpenAI, Stripe, and Twilio. Use a dark blueprint style like the reference image, with regions, numbered nodes, role legend, and sync/async edges."
+    expect:
+      - "Uses production-architecture-blueprint reference"
+      - "Groups nodes into edge, workload/orchestration, data plane, and external provider regions"
+      - "Labels regions as R# and nodes as N#"
+      - "Differentiates synchronous calls from asynchronous events"
+      - "Includes assumptions for missing protocols or inferred relationships"
