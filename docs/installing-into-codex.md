@@ -104,6 +104,72 @@ fi
 cp -R skills/travel-article-beautifier "$dest"
 ```
 
+## Updating After Code Changes
+
+The update path depends on the original install method.
+
+### Copy Install
+
+If you installed by copying, run the helper again:
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --backup-existing
+```
+
+If you do not need the previous installed copy:
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --overwrite
+```
+
+Update all skills:
+
+```bash
+python3 utils/install_skill.py --all --backup-existing
+```
+
+### Symlink Install
+
+If you installed with a symlink, no reinstall is needed:
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --method symlink --backup-existing
+```
+
+The Codex skills directory points directly to the skill in this repository. After editing repository files, Codex should see the updated skill on the next turn.
+
+### Harness Changes
+
+The harness is not installed into the Codex skills directory. It runs from this repository:
+
+```bash
+python3 utils/check_harness.py
+python3 harness/run_case.py --case field-journal-style
+```
+
+When harness code, cases, rubrics, or quality gates change, rerun the harness locally. No Codex skill reinstall is needed.
+
+### Recommended Flow
+
+Use symlink mode while actively editing:
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --method symlink --backup-existing
+```
+
+Use copy mode for stable installs or sharing:
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --backup-existing
+```
+
+Before and after updates, run:
+
+```bash
+python3 utils/check_skills.py
+python3 utils/check_harness.py
+```
+
 ## Verify Installed Files
 
 Check that the skill exists:

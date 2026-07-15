@@ -104,6 +104,72 @@ fi
 cp -R skills/travel-article-beautifier "$dest"
 ```
 
+## 代码变动后如何更新
+
+更新方式取决于你最初的安装方式。
+
+### copy 安装
+
+如果是普通复制安装，代码变动后重新运行安装脚本：
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --backup-existing
+```
+
+如果不需要保留旧版本，可以直接覆盖：
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --overwrite
+```
+
+更新全部 skills：
+
+```bash
+python3 utils/install_skill.py --all --backup-existing
+```
+
+### symlink 安装
+
+如果是软链接安装，不需要重新安装：
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --method symlink --backup-existing
+```
+
+软链接会让 Codex skills 目录直接指向本仓库里的 skill。之后你改仓库中的文件，安装目录会自动看到最新内容。通常下一轮 Codex 对话即可使用更新后的 skill。
+
+### harness 变动
+
+`harness/` 不安装到 Codex skills 目录。它始终在本仓库中运行：
+
+```bash
+python3 utils/check_harness.py
+python3 harness/run_case.py --case field-journal-style
+```
+
+所以 harness 代码、评测用例、rubric 或 quality gates 变动后，不需要更新 Codex 安装，只需要在仓库中重新运行 harness。
+
+### 推荐流程
+
+开发期推荐 symlink：
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --method symlink --backup-existing
+```
+
+稳定使用或发布时推荐 copy：
+
+```bash
+python3 utils/install_skill.py travel-article-beautifier --backup-existing
+```
+
+每次更新前后建议跑：
+
+```bash
+python3 utils/check_skills.py
+python3 utils/check_harness.py
+```
+
 ## 验证安装结果
 
 查看 skill 是否已经复制到 Codex skills 目录：
