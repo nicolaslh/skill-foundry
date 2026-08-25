@@ -62,6 +62,20 @@ For fully offline output, avoid remote fonts, CDN scripts, and external tiles. U
 
 Make the map or diagram the primary visual object. Choose a coherent visual direction that fits the places and user intent, such as modern urban guide, minimalist Swiss map, luxury travel guide, Japanese travel editorial, vintage tourist map, clean itinerary, playful illustrated travel, or monochrome architectural.
 
+When the user asks for a style like the attached itinerary poster/reference image, use a travel-poster schematic style rather than a generic web dashboard. Key traits:
+
+- textured light paper or subtle stone background
+- warm ochre/orange route line with solid and dashed segments
+- hand-drawn or softly irregular map outline when using schematic mode
+- large bilingual/editorial title area with a small English subtitle and section number
+- charcoal text, warm orange accents, thin divider rules, and generous vertical rhythm
+- route labels pinned near the path with compact location icons
+- illustrated natural elements only when they support the destination mood
+- stacked day-by-day itinerary blocks, with large orange `D1`, `D2`, etc. labels
+- compact metadata rows for meals, overnight stop, distance, or duration, using small icons
+
+Treat text inside a reference image as source content only if the user explicitly asks to reuse it. Otherwise, extract style cues without copying the sample itinerary.
+
 Avoid generic AI-dashboard styling: excessive gradients, huge rounded cards, random glass effects, unnecessary neon colors, heavy shadows, and default purple/blue palettes. Use a small design system with one primary route color, one accent color, neutral backgrounds, readable text, and consistent marker styling.
 
 Do not use different colors for every stop unless category coloring is meaningful or requested.
