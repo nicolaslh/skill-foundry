@@ -38,6 +38,8 @@ Install all skills:
 python3 utils/install_skill.py --all
 ```
 
+Skills that already exist at the destination are skipped and reported, and the run continues with the remaining skills. The command prints a summary such as `Summary: 6 installed, 2 skipped, 0 failed`, and exits non-zero only when an install actually fails.
+
 Install to a custom destination:
 
 ```bash

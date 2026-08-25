@@ -38,6 +38,8 @@ python3 utils/install_skill.py travel-article-beautifier
 python3 utils/install_skill.py --all
 ```
 
+目标目录里已经存在的 skill 会被跳过并提示，不会中断后续 skill 的安装。命令结束时会打印统计，例如 `Summary: 6 installed, 2 skipped, 0 failed`；只有真正安装失败时退出码才为非零。
+
 安装到自定义目录：
 
 ```bash

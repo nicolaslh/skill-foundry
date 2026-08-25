@@ -16,17 +16,25 @@ LOCAL_SKILLS = ROOT / "skills"
 DEFAULT_DEST = Path(os.environ.get("CODEX_HOME", Path.home() / ".codex")) / "skills"
 
 
+class SkipInstall(Exception):
+    """Destination already exists and should be left untouched."""
+
+
 def skill_dirs(names: list[str], install_all: bool) -> list[Path]:
     if install_all:
         return sorted(path for path in LOCAL_SKILLS.iterdir() if path.is_dir())
     if not names:
         raise SystemExit("Provide at least one skill name or use --all")
     result = []
+    missing = []
     for name in names:
         path = LOCAL_SKILLS / name
         if not path.is_dir():
-            raise SystemExit(f"Skill not found: {name}")
+            missing.append(name)
+            continue
         result.append(path)
+    if missing:
+        raise SystemExit(f"Skill(s) not found: {', '.join(missing)}")
     return result
 
 
@@ -50,24 +58,36 @@ def prepare_dest(dest: Path, overwrite: bool, backup_existing: bool) -> None:
             shutil.rmtree(dest)
         print(f"Removed existing {dest}")
         return
-    raise SystemExit(f"Destination exists: {dest}. Use --backup-existing or --overwrite.")
+    raise SkipInstall(f"already exists at {dest}")
 
 
-def install_skill(source: Path, dest_root: Path, method: str, overwrite: bool, backup_existing: bool) -> None:
-    dest_root.mkdir(parents=True, exist_ok=True)
+def install_skill(
+    source: Path, dest_root: Path, method: str, overwrite: bool, backup_existing: bool
+) -> str:
     dest = dest_root / source.name
-    prepare_dest(dest, overwrite, backup_existing)
-    if method == "copy":
-        shutil.copytree(source, dest)
-    elif method == "symlink":
-        dest.symlink_to(source, target_is_directory=True)
-    else:
-        raise SystemExit(f"Unknown method: {method}")
+    try:
+        dest_root.mkdir(parents=True, exist_ok=True)
+        prepare_dest(dest, overwrite, backup_existing)
+        if method == "copy":
+            shutil.copytree(source, dest)
+        elif method == "symlink":
+            dest.symlink_to(source, target_is_directory=True)
+        else:
+            raise SystemExit(f"Unknown method: {method}")
+    except SkipInstall as skip:
+        print(f"Skipped {source.name}: {skip} (use --overwrite or --backup-existing to replace)")
+        return "skipped"
+    except OSError as error:
+        print(f"Failed {source.name} -> {dest}: {error}", file=sys.stderr)
+        return "failed"
     print(f"Installed {source.name} -> {dest} ({method})")
+    return "installed"
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description=f"{__doc__} Skills that already exist at the destination are skipped.",
+    )
     parser.add_argument("skills", nargs="*", help="Skill names to install")
     parser.add_argument("--all", action="store_true", help="Install all local skills")
     parser.add_argument("--dest", default=str(DEFAULT_DEST), help="Destination skills directory")
@@ -80,9 +100,18 @@ def main() -> int:
         raise SystemExit("Choose only one of --overwrite or --backup-existing")
 
     dest_root = Path(args.dest).expanduser()
+    tally = {"installed": 0, "skipped": 0, "failed": 0}
     for source in skill_dirs(args.skills, args.all):
-        install_skill(source, dest_root, args.method, args.overwrite, args.backup_existing)
-    return 0
+        status = install_skill(
+            source, dest_root, args.method, args.overwrite, args.backup_existing
+        )
+        tally[status] += 1
+
+    print(
+        f"Summary: {tally['installed']} installed, "
+        f"{tally['skipped']} skipped, {tally['failed']} failed"
+    )
+    return 1 if tally["failed"] else 0
 
 
 if __name__ == "__main__":
