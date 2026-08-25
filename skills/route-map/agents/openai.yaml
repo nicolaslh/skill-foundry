@@ -1,0 +1,4 @@
+interface:
+  display_name: "Route Map"
+  short_description: "Generate polished HTML maps and route visualizations"
+  default_prompt: "Use $route-map to turn these places, route notes, or itinerary details into a polished responsive HTML visualization with map markers when coordinates are available."
