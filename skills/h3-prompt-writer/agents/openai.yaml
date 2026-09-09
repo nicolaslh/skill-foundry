@@ -1,0 +1,4 @@
+interface:
+  display_name: "H3 Prompt Writer"
+  short_description: "Generate structured MiniMax-H3 / ComfyUI video prompts"
+  default_prompt: "Use $h3-prompt-writer to turn these characters, scene, plot, dialogue, camera, and voice notes into a MiniMax-H3 / ComfyUI video prompt using the fixed Subject / S / Shot / says structure."

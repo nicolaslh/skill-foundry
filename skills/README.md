@@ -8,6 +8,7 @@ Current starter skills:
 - `travel-article-beautifier`: polished travelogue article and visual layout creation
 - `diagram-generator`: HTML-first flowchart, architecture, dependency, and sequence diagram generation
 - `route-map`: polished HTML maps and route visualizations from place or itinerary information
+- `h3-prompt-writer`: structured MiniMax-H3 / ComfyUI video prompts with fixed Subject / S / Shot / says bindings
 - `xiaohongshu`: Xiaohongshu-style post drafting
 - `markdown-formatter`: Markdown cleanup and structure
 - `summarizer`: faithful summaries of source material
