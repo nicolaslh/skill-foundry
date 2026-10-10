@@ -16,18 +16,28 @@ Default output language is Chinese, because the fixed syntax and dialogue tags a
 Never change the fixed syntax. Only replace character, scene, plot, dialogue, camera action, and voice content.
 
 ```text
-<Subject> / S / [Shot] / says / <d>
+<Subject> / <Picture> / S / [Shot] / says / <d>
 ```
 
 Token priority, highest first:
 
 ```text
 <SubjectX>
+<Picture X>
 S X
 [Shot X]
 <Subject X> (SX) says:
 <d>[Chinese]...</d>
 ```
+
+## Reference Image Binding
+
+`<Picture X>` anchors a character to a supplied reference image and is what keeps appearance from drifting. It is part of the fixed syntax, not optional decoration.
+
+- Number pictures in the order the user supplied them, and keep that mapping stable.
+- Say where the character sits inside that image, such as 画面左侧 or 画面右侧, so a multi-character reference image resolves correctly.
+- Two characters from the same image share the picture number and differ by position.
+- When no reference image exists, drop the `<Picture X>` clause and describe appearance directly. Never invent a picture number.
 
 ## Input Intake
 
@@ -46,7 +56,7 @@ When shots are not supplied, split the plot into shots yourself. When the user f
 
 1. Parse characters and assign `<SubjectX>` numbers.
 2. Assign one `S` number per speaking character, matching its Subject number.
-3. Lock visual features, preferring reference-image detail over invention.
+3. Bind each character to its `<Picture X>` reference image and position, then lock visual features from that image instead of inventing them.
 4. Lock voice features: fixed attributes, emotion variants, forbidden styles.
 5. Build the scene block and the spatial relationship block.
 6. Read the plot as a timeline, then split it into shots.
@@ -89,6 +99,7 @@ If a detail is missing but reasonably inferable, take the most conservative, con
 Before returning the prompt, verify:
 
 - Subject numbers are unique, and appearance, clothing, and props stay consistent
+- every character with a reference image carries `<Picture X>` plus a position, and picture numbers match the supplied images
 - every speaking character has a unique S number that matches its Subject
 - each voice block has fixed attributes, emotion variants, and forbidden styles
 - each shot has a shot size, a readable action order, and needed micro-actions

@@ -25,6 +25,31 @@ Rules:
 - Prefer reference-image features when a reference image is supplied.
 - Keep clothing, hair, and props consistent across the whole video unless the plot changes them explicitly.
 
+### Picture Binding
+
+`<Picture X>` is the reference-image anchor and stays in the fixed syntax.
+
+- Picture numbers follow the order the user supplied the images, and the mapping never shifts mid-prompt.
+- Always state the character's position inside the image so a multi-character reference resolves correctly.
+- Two characters from one image share the picture number and differ only by position:
+
+```text
+<Subject1> Gu Yan是<Picture 1>画面左侧男性，保留参考图中的面部特征、黑色短发、黑色西装、白色衬衫、身材比例以及整体外貌。
+<Subject2> Lin Xi是<Picture 1>画面右侧女性，保留参考图中的面部特征、深棕色长发、米色风衣、身材比例以及整体外貌。
+```
+
+- Characters from separate images take separate numbers:
+
+```text
+<Subject2> Lin Xi是<Picture 2>画面中央女性，保留参考图中的面部特征、深棕色长发、米色风衣、身材比例以及整体外貌。
+```
+
+- With no reference image, drop the `<Picture X>` clause and describe appearance directly. Do not invent a picture number:
+
+```text
+<Subject1> Gu Yan是画面左侧男性，20岁出头，黑色短发，黑色西装，白色衬衫，身形偏瘦高。
+```
+
 ## 2. Voice Block
 
 Every speaking character is bound to a unique `S` number.
@@ -182,10 +207,10 @@ Never add background music unless the user explicitly asks for it.
 ## 9. Full Output Template
 
 ```text
-<Subject1>[人物1身份及外貌描述]。
+<Subject1>[人物1名称]是<Picture 1>画面[位置]人物，保留参考图中的[面部特征]、[发型]、[服装]、[身材比例]、[道具]以及整体外貌。
 <Subject1>，S1 永远是说话人。S1始终使用一种固定的声音：[声音设定]。[情绪变化]。禁止[声音禁止项]。
 
-<Subject2>[人物2身份及外貌描述]。
+<Subject2>[人物2名称]是<Picture 2>画面[位置]人物，保留参考图中的[面部特征]、[发型]、[服装]、[身材比例]、[道具]以及整体外貌。
 <Subject2>，S2 永远是说话人。S2始终使用一种固定的声音：[声音设定]。[情绪变化]。禁止[声音禁止项]。
 
 <Subject3>是[场景描述]。
@@ -217,3 +242,5 @@ Never add background music unless the user explicitly asks for it.
 
 无背景音乐,仅保留环境音与人声和音效;画面禁字幕/文字/水印/Logo;禁止可读文字(指画面字幕文字,不含人声台词)
 ```
+
+Adjust the picture numbers to the actual references. Two characters in one image both use `<Picture 1>` and differ by position; with no reference image, drop the `<Picture X>` clause entirely.

@@ -109,7 +109,9 @@ Do not stack micro-actions that carry no meaning.
 
 ## Continuity
 
-Later shots inherit everything already established: character position, left/right relationship, clothing, hair, props, prop state, relationships, environment, time, light, eyeline axis.
+Later shots inherit everything already established: reference-image binding, character position, left/right relationship, clothing, hair, props, prop state, relationships, environment, time, light, eyeline axis.
+
+`<Picture X>` is declared once in the character block and holds for the whole prompt. Do not restate it per shot, and do not reassign a character to a different picture number mid-prompt.
 
 Prop state must progress legibly:
 
@@ -134,6 +136,9 @@ Do not let the bag reappear in the other hand in Shot 4 without a reason.
 Characters:
 
 - [ ] Subject numbers unique
+- [ ] `<Picture X>` present for every character that has a reference image
+- [ ] picture numbers match the order the user supplied the images
+- [ ] position inside the reference image stated
 - [ ] left/right positions consistent
 - [ ] appearance consistent
 - [ ] clothing consistent
